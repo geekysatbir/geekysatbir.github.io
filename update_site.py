@@ -349,7 +349,8 @@ def create_publication_files(root_dir):
         filepath = pub_dir / filename
         citation = f"{pub['authors']} ({pub['date'][:4]}) \"{pub['title']}.\" <i>{pub['venue']}</i>."
         
-        # *** THIS IS THE FIX: The 'collection: publications' line is ADDED BACK ***
+        # *** THIS IS THE CORRECTED CODE BLOCK ***
+        # The 'collection: publications' line is now correctly included.
         content = f"""---
 title: "{pub['title']}"
 collection: publications
