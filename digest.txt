@@ -1008,9 +1008,10 @@ def create_publication_files(root_dir):
         filepath = pub_dir / filename
         citation = f"{pub['authors']} ({pub['date'][:4]}) \"{pub['title']}.\" <i>{pub['venue']}</i>."
         
-        # *** THIS IS THE FIX: The 'collection' line is removed ***
+        # *** THIS IS THE FIX: The 'collection: publications' line is ADDED BACK ***
         content = f"""---
 title: "{pub['title']}"
+collection: publications
 category: {pub['category']}
 permalink: /publication/{pub['date']}-{slugify(pub['title'][:40])}
 date: {pub['date']}
@@ -5505,6 +5506,7 @@ FILE: _publications/2025-01-01-from-ops-to-experience-aiops-enabled-ml.md
 ================================================
 ---
 title: "From Ops to Experience: AIOps-Enabled MLOps with Identity-Aware and Customer-Informed Pipelines"
+collection: publications
 category: published
 permalink: /publication/2025-01-01-from-ops-to-experience-aiops-enabled-ml
 date: 2025-01-01
@@ -5520,6 +5522,7 @@ FILE: _publications/2025-01-02-blockchain-based-intrusion-detection-and.md
 ================================================
 ---
 title: "Blockchain-Based Intrusion Detection and Response Framework for Secure Industrial IoT Networks"
+collection: publications
 category: published
 permalink: /publication/2025-01-02-blockchain-based-intrusion-detection-and
 date: 2025-01-02
@@ -5535,6 +5538,7 @@ FILE: _publications/2025-06-01-unifying-devops-and-mlops-pipelines-via.md
 ================================================
 ---
 title: "Unifying DevOps and MLOps Pipelines Via AI-driven Observability: A Mixed-Methods Study"
+collection: publications
 category: published
 permalink: /publication/2025-06-01-unifying-devops-and-mlops-pipelines-via
 date: 2025-06-01
@@ -5551,6 +5555,7 @@ FILE: _publications/2026-01-01-a-review-of-hybrid-neural-network-and-fu.md
 ================================================
 ---
 title: "A Review of Hybrid Neural Network and Fuzzy Logic Control Techniques for Optimising Electric Vehicle Performance"
+collection: publications
 category: under_review
 permalink: /publication/2026-01-01-a-review-of-hybrid-neural-network-and-fu
 date: 2026-01-01
