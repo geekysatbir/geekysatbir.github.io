@@ -17,14 +17,19 @@ echo "➡️  Staging all changes..."
 git add .
 
 # 2. Commit the changes with a default message
-# You can change the commit message here if you like.
 COMMIT_MESSAGE="site update"
 echo "📝 Committing changes with message: '$COMMIT_MESSAGE'..."
-git commit -m "$COMMIT_MESSAGE"
+# Use '|| true' to prevent the script from failing if there are no changes to commit
+# after the initial check (e.g., only whitespace changes git might ignore).
+git commit -m "$COMMIT_MESSAGE" || true
 
-# 3. Push the changes to the 'main' branch on GitHub
-# If your branch is named 'master', change 'main' to 'master' below.
-echo "⬆️  Pushing changes to the 'main' branch on GitHub..."
-git push origin main
+# 3. Push the changes, forcing a credential prompt
+echo "⬆️  Pushing changes to the 'master' branch on GitHub..."
+echo "💡 Disabling credential helper to force a login prompt."
+echo "💡 When prompted, use the username 'geekysatbir' and a Personal Access Token as the password."
+
+# The '-c credential.helper=' part temporarily overrides the configuration
+# for this single command, forcing Git to ask for credentials.
+git -c credential.helper= push origin master
 
 echo "✅ Website update complete and pushed to GitHub!"
