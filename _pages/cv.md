@@ -64,7 +64,7 @@ author_profile: true
 
 
 ## Core Competencies
-* AIOps & Intelligent Automation
+* AIOps & Intelligent Automation (AI-driven auto-remediation)
 * Full‑Stack Observability (AppDynamics, Splunk)
 * Identity & Access Management (IAM)
 * SaaS Reliability Engineering & Digital Resilience
