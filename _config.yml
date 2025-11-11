@@ -6,7 +6,7 @@ name: Satbir Singh
 description: Satbir Singh's Professional Portfolio
 url: ''
 baseurl: ''
-repository: SatbirMD/SatbirMD.github.io
+repository: geekysatbir/geekysatbir.github.io
 author:
   avatar: profile.jpeg
   name: Satbir Singh
@@ -29,11 +29,11 @@ author:
   bitbucket: null
   codepen: null
   dribbble: null
-  github: SatbirMD
+  github: geekysatbir
   kaggle: null
   stackoverflow: null
   artstation: null
-  bluesky: bsky.app
+  bluesky: null
   facebook: satbir.singh.58726
   flickr: null
   foursquare: null

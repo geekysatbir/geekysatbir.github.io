@@ -6,16 +6,16 @@ import json
 from pathlib import Path
 
 # --- SATBIR SINGH'S DATA ---
-# (This section remains the same as before)
+# This dictionary holds all the content for the website.
 SATBIR_DATA = {
     "name": "Satbir Singh",
     "email": "satbir.taya84@gmail.com",
     "phone": "+1 510-402-1230",
     "location": "Castro Valley, CA",
-    "avatar": "profile.jpeg",
+    "avatar": "profile.jpeg",  # CORRECTED to .jpeg
     "profiles": {
         "linkedin_user": "satbirprofile",
-        "github_user": "SatbirMD",
+        "github_user": "geekysatbir",  # CORRECTED username
         "facebook_user": "satbir.singh.58726",
         "instagram_user": "satbir7262",
     },
@@ -240,10 +240,8 @@ def update_config(root_dir):
     with open(config_path, 'r') as f:
         config = yaml.safe_load(f)
 
-    # Basic site settings
     github_user = SATBIR_DATA['profiles']['github_user']
     
-    # *** THIS IS THE FIX ***
     # Let GitHub Pages automatically set the URL and baseurl.
     config['url'] = ""
     config['baseurl'] = ""
@@ -253,7 +251,6 @@ def update_config(root_dir):
     config['description'] = "Satbir Singh's Professional Portfolio"
     config['repository'] = f"{github_user}/{github_user}.github.io"
 
-    # Author settings
     config['author']['name'] = SATBIR_DATA['name']
     config['author']['avatar'] = SATBIR_DATA['avatar']
     config['author']['bio'] = "Technology Leader in AIOps, Observability, and SaaS Reliability."
@@ -261,18 +258,15 @@ def update_config(root_dir):
     config['author']['employer'] = "Cisco Systems, Inc."
     config['author']['email'] = SATBIR_DATA['email']
     
-    # Social/Academic links
     config['author']['github'] = github_user
     config['author']['linkedin'] = SATBIR_DATA['profiles']['linkedin_user']
     config['author']['facebook'] = SATBIR_DATA['profiles']['facebook_user']
     config['author']['instagram'] = SATBIR_DATA['profiles']['instagram_user']
     
-    # Clear unused links
-    for key in ['googlescholar', 'twitter', 'medium', 'stackoverflow', 'orcid', 'pubmed']:
+    for key in ['googlescholar', 'twitter', 'medium', 'stackoverflow', 'orcid', 'pubmed', 'bluesky']:
         if key in config['author']:
             config['author'][key] = None
 
-    # Publication categories
     config['publication_category'] = {
         'published': {'title': 'Peer-Reviewed Publications'},
         'under_review': {'title': 'Manuscripts Under Review'}
@@ -282,18 +276,9 @@ def update_config(root_dir):
         yaml.dump(config, f, sort_keys=False)
     print("Successfully updated _config.yml")
 
-
-
-
-
-
 def update_homepage(root_dir):
-    """Updates the homepage (_pages/about.md)."""
     print("--- Updating Homepage ---")
     homepage_path = root_dir / '_pages' / 'about.md'
-    
-    # The fix is here: We change the title to something simple like "About"
-    # and remove the main h1 from the body, as the layout handles the title.
     content = f"""---
 permalink: /
 title: "About"
@@ -306,15 +291,9 @@ author_profile: true
 """
     for competency in SATBIR_DATA['competencies']:
         content += f"- {competency}\n"
-
     with open(homepage_path, 'w') as f:
         f.write(content)
     print("Successfully updated homepage.")
-
-
-
-
-
 
 def create_experience_page(root_dir):
     print("--- Creating Experience Page ---")
@@ -486,20 +465,134 @@ def update_cv_json(root_dir):
         json.dump(cv_data, f, indent=2)
     print("Successfully updated cv.json")
 
+# --- NEW FUNCTIONS TO FIX TEMPLATE FILES ---
+
+def overwrite_template_files(root_dir):
+    """Overwrites specific template files with corrected versions."""
+    print("--- Overwriting template files for fixes ---")
+
+    # Fix for empty Publications page
+    publications_page_path = root_dir / '_pages' / 'publications.html'
+    publications_content = """---
+layout: archive
+title: "Publications"
+permalink: /publications/
+author_profile: true
+---
+
+{% include base_path %}
+
+{% for post in site.publications reversed %}
+  {% include archive-single.html %}
+{% endfor %}
+"""
+    with open(publications_page_path, 'w') as f:
+        f.write(publications_content)
+    print("Fixed publications page.")
+
+    # Fix for Talks page formatting
+    talks_include_path = root_dir / '_includes' / 'archive-single-talk.html'
+    talks_include_content = """{% include base_path %}
+
+{% if post.id %}
+  {% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
+{% else %}
+  {% assign title = post.title %}
+{% endif %}
+
+<div class="{{ include.type | default: "list" }}__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <h2 class="archive__item-title" itemprop="headline">
+      <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
+    </h2>
+    {% if post.date %}<p class="page__meta"><i class="fa fa-clock" aria-hidden="true"></i> {{ post.date | date: '%B %d, %Y' }}</p>{% endif %}
+    <p class="archive__item-excerpt" itemprop="description">
+      {{ post.type }} at {{ post.venue }}{% if post.location and post.location != "" %}, {{ post.location }}{% endif %}
+    </p>
+    {% if post.excerpt %}<p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify }}</p>{% endif %}
+  </article>
+</div>
+"""
+    with open(talks_include_path, 'w') as f:
+        f.write(talks_include_content)
+    print("Fixed talks page formatting.")
+
+def create_cv_page(root_dir):
+    """Creates the markdown CV page with Satbir's data."""
+    print("--- Creating CV Page ---")
+    cv_page_path = root_dir / '_pages' / 'cv.md'
+    
+    # Build Work Experience section
+    work_experience_md = ""
+    for job in SATBIR_DATA['experience']:
+        work_experience_md += f"* **{job['title']}**, {job['company']}\n"
+        work_experience_md += f"  *_{job['dates']}, {job['location']}_*\n"
+        for detail in job['details']:
+            work_experience_md += f"  * {detail}\n"
+        work_experience_md += "\n"
+
+    content = f"""---
+layout: archive
+title: "CV"
+permalink: /cv/
+author_profile: true
+---
+
+{{% include base_path %}}
+
+## Education
+* {SATBIR_DATA['education']['degree']}, {SATBIR_DATA['education']['institution']}, {SATBIR_DATA['education']['year']}
+
+## Work Experience
+{work_experience_md}
+
+## Core Competencies
+{{% for skill in page.skills %}}
+* {{ skill }}
+{{% endfor %}}
+
+## Publications
+<ul>{{% for post in site.publications reversed %}}
+  {{% include archive-single-cv.html %}}
+{{% endfor %}}</ul>
+
+## Talks & Presentations
+<ul>{{% for post in site.talks reversed %}}
+  {{% include archive-single-talk-cv.html %}}
+{{% endfor %}}</ul>
+"""
+    # Replace Jekyll placeholders to avoid processing them in Python
+    content = content.replace("{{%", "{%").replace("%}}", "}}")
+    
+    with open(cv_page_path, 'w') as f:
+        f.write(content)
+    print("Successfully created cv.md")
+
+
 def main():
     repo_root = Path(__file__).parent.resolve()
     print(f"Updating repository at: {repo_root}")
+    
     clean_repository(repo_root)
     update_config(repo_root)
+    
+    # Page content
     update_homepage(repo_root)
     create_experience_page(repo_root)
     create_awards_page(repo_root)
+    create_cv_page(repo_root) # New function call
+    
+    # Collection files
     create_publication_files(repo_root)
     create_talk_files(repo_root)
+    
+    # Data and template fixes
     update_navigation(repo_root)
     update_cv_json(repo_root)
+    overwrite_template_files(repo_root) # New function call
+    
     print("\n✅ All tasks completed successfully!")
-    print("Please add a 'profile.png' to the 'images/' directory if you haven't already.")
+    print("Please add a 'profile.jpeg' to the 'images/' directory if you haven't already.")
     print("You can now commit and push your changes to GitHub using './update.sh'.")
 
 if __name__ == '__main__':
