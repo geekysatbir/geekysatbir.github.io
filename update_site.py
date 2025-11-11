@@ -303,7 +303,6 @@ author_profile: true
     for competency in SATBIR_DATA['competencies']:
         content += f"- {competency}\n"
 
-    # --- NEW: Add Recent News Section ---
     content += "\n## Recent News\n"
     all_items = []
     for pub in SATBIR_DATA['publications']:
@@ -311,9 +310,9 @@ author_profile: true
     for talk in SATBIR_DATA['talks']:
         all_items.append({'date': talk['date'], 'type': talk['type'], 'title': talk['title'], 'venue': talk['venue']})
     
-    sorted_items = sorted(all_items, key=lambda x: x['date'], reverse=True)
+    sorted_items = sorted(all_items, key=lambda x: datetime.strptime(x['date'], '%Y-%m-%d'), reverse=True)
     
-    for item in sorted_items[:3]: # Get the 3 most recent items
+    for item in sorted_items[:3]:
         content += f"* **{item['type']}:** \"{item['title']}\" at *{item['venue']}*.\n"
 
     with open(homepage_path, 'w') as f:
@@ -350,9 +349,9 @@ def create_publication_files(root_dir):
         filepath = pub_dir / filename
         citation = f"{pub['authors']} ({pub['date'][:4]}) \"{pub['title']}.\" <i>{pub['venue']}</i>."
         
+        # *** THIS IS THE FIX: The 'collection' line is removed ***
         content = f"""---
 title: "{pub['title']}"
-collection: publications
 category: {pub['category']}
 permalink: /publication/{pub['date']}-{slugify(pub['title'][:40])}
 date: {pub['date']}
@@ -558,10 +557,10 @@ def create_cv_page(root_dir):
     
     work_experience_md = ""
     for job in SATBIR_DATA['experience']:
-        work_experience_md += f"* **{job['title']}**, {job['company']}\n"
-        work_experience_md += f"  *_{job['dates']}, {job['location']}_*\n"
+        work_experience_md += f"### {job['title']}\n"
+        work_experience_md += f"**{job['company']}** | *{job['dates']}, {job['location']}*\n\n"
         for detail in job['details']:
-            work_experience_md += f"  * {detail}\n"
+            work_experience_md += f"- {detail}\n"
         work_experience_md += "\n"
 
     competencies_md = "\n".join([f"* {c}" for c in SATBIR_DATA['competencies']])
@@ -576,7 +575,7 @@ author_profile: true
 {{% include base_path %}}
 
 ## Education
-* {SATBIR_DATA['education']['degree']}, {SATBIR_DATA['education']['institution']}, {SATBIR_DATA['education']['year']}
+* **{SATBIR_DATA['education']['degree']}**, {SATBIR_DATA['education']['institution']}, {SATBIR_DATA['education']['year']}
 
 ## Work Experience
 {work_experience_md}

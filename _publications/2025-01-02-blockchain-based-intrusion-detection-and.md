@@ -1,6 +1,5 @@
 ---
 title: "Blockchain-Based Intrusion Detection and Response Framework for Secure Industrial IoT Networks"
-collection: publications
 category: published
 permalink: /publication/2025-01-02-blockchain-based-intrusion-detection-and
 date: 2025-01-02
