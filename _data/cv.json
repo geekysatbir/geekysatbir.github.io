@@ -1,152 +1,166 @@
 {
   "basics": {
-    "name": "Your Sidebar Name",
-    "email": "none@example.org",
-    "phone": "",
-    "website": "https://academicpages.github.io",
-    "summary": "Currently employed at Red Brick University. Short biography for the left-hand sidebar",
+    "name": "Satbir Singh",
+    "email": "satbir.taya84@gmail.com",
+    "phone": "+1 510-402-1230",
+    "website": "https://SatbirMD.github.io",
+    "summary": "Distinguished technology leader with 19 years across AIOps, Observability, SaaS Reliability, and Identity & Access Management. Credited with original contributions of major significance adopted by Fortune 500 enterprises and U.S. agencies; automation frameworks reduced MTTR by up to 45% and hardened mission-critical platforms. Performed leading and critical roles in high-impact escalations safeguarding service continuity. Recognized by others in the field as an IEEE Senior Member, IETE Fellow, and SCRS Fellow with peer-reviewed publications, judging roles, and advisory work\u2014evidence of sustained national and international acclaim placing me among the small percentage at the very top of the field. My proposed continued work in the United States will prospectively benefit the United States by scaling identity-aware observability and AI-driven auto-remediation across essential public- and private-sector systems.",
     "location": {
-      "address": "",
-      "postalCode": "",
-      "city": "Earth",
-      "countryCode": "US",
-      "region": ""
+      "city": "Castro Valley, CA"
     },
     "profiles": [
       {
-        "network": "Google Scholar",
-        "username": "",
-        "url": "https://scholar.google.com/citations?user=PS_CX0AAAAAJ"
+        "network": "Linkedin",
+        "username": "satbirprofile",
+        "url": "https://www.linkedin.com/in/satbirprofile/"
       },
       {
-        "network": "ORCID",
-        "username": "",
-        "url": "https://orcid.org/yourorcidurl"
-      },
-      {
-        "network": "GitHub",
-        "username": "academicpages",
-        "url": "https://github.com/academicpages"
+        "network": "Github",
+        "username": "SatbirMD",
+        "url": "https://github.com/SatbirMD/"
       }
     ]
   },
-  "work": [],
-  "education": [
+  "work": [
     {
-      "institution": "GitHub University",
-      "area": "Ph.D in Version Control Theory",
-      "studyType": "",
-      "startDate": "",
-      "endDate": "2018",
-      "gpa": null,
-      "courses": []
+      "company": "Cisco Systems, Inc. (AppDynamics/Splunk)",
+      "position": "Software Consulting Engineer",
+      "startDate": "Apr 2019",
+      "endDate": "Present",
+      "summary": "",
+      "highlights": [
+        "Led end-to-end SaaS observability strategies ensuring uninterrupted performance across multi-billion-dollar deployments.",
+        "Won an award at Cisco for creating CaseMaster tool that reduced manual effort by 1500 hours every month for the customer engineering team. Also won $2500 worth of awards from various team members for my great job.",
+        "Engineered signal-driven diagnostics and runbooks \u2192 \u221245% MTTR; protected Fortune 500 and U.S. federal agencies (DHS, DOS/CA, IRS, NASA).",
+        "Resolved 120+ high-priority escalations annually, safeguarding $500M+ in customer continuity.",
+        "CSOne\u2194Webex automation standard across CX \u2192 1,550+ hrs/yr saved, faster MTTR, higher CSAT.",
+        "Built dashboards/health rules for 1,500+ apps (K8s + on-prem) \u2192 99.9% uptime on Black Friday; \u221280% migration-risk downtime.",
+        "Optimized tracing/JVM instrumentation for booking/check-in \u2192 99.95% uptime, \u221230% latency, \u221240% response time.",
+        "Custom API-volume views \u2192 99.9% availability across 700k+ patent transactions/year.",
+        "Authored K8s/containers/serverless monitoring runbooks used by 20+ enterprises \u2192 35% faster time-to-value, \u221225% incident response time.",
+        "Built and tuned AI for HTOM \u2192 +70% improvement in Golden Rules ratings.",
+        "Contributed to Splunk community by writing Technical articles and helping our product users."
+      ]
     },
     {
-      "institution": "GitHub University",
-      "area": "M.S. in Jekyll",
-      "studyType": "",
-      "startDate": "",
-      "endDate": "2014",
-      "gpa": null,
-      "courses": []
+      "company": "Persistent Systems",
+      "position": "Senior Implementation Engineer",
+      "startDate": "Aug 2015",
+      "endDate": "Mar 2019",
+      "summary": "",
+      "highlights": [
+        "ERCOT (OEM for Oracle IAM): Observability for OAM/OIM/OVD/OID \u2192 99.9% uptime, \u221240% incident response time, +15% login success.",
+        "Intuit (IAM support automation): Observability-driven runbooks \u2192 \u221260% MTTR on ~500 tickets/mo, \u221240% OPEX (~$200K/yr).",
+        "USAA (IAM roles & advanced auth): Risk-based observability \u2192 +40% security efficiency, \u221230% unauthorized access.",
+        "Exelon (OUD migration): Observability-first directory stack \u2192 +40% directory speed, 100% migration success."
+      ]
     },
     {
-      "institution": "GitHub University",
-      "area": "B.S. in GitHub",
-      "studyType": "",
-      "startDate": "",
-      "endDate": "2012",
-      "gpa": null,
-      "courses": []
+      "company": "Wipro",
+      "position": "Technical Lead",
+      "startDate": "Jul 2013",
+      "endDate": "Jul 2015",
+      "summary": "",
+      "highlights": [
+        "Kohl\u2019s (Lead Engineer): Led OWASP Top-10 testing; risk/MTTR dashboards \u2192 \u221235% MTTR, 2\u00d7 vuln-closure rate.",
+        "Seagate (Senior Software Engineer): Built Oracle IAM end-to-end; SLO dashboards & alerts \u2192 99.5% uptime, \u221250% provisioning time.",
+        "Telenor Myanmar: Setup Identity and access management for the first ever Telecom setup in Myanmar."
+      ]
+    },
+    {
+      "company": "AlertEnterprise, Inc.",
+      "position": "Sr. Specialist Development Engineer",
+      "startDate": "Nov 2011",
+      "endDate": "Jun 2013",
+      "summary": "",
+      "highlights": [
+        "Shipped core IAM modules and suite hardening; acted as Scrum Master \u2192 +22% velocity, \u221228% defect leakage.",
+        "Built 12+ connectors (incl. OAuth Salesforce, SCIM, Linux/Unix) and a Connector Management portal.",
+        "Embedded identity telemetry on 100% new connectors \u2192 \u221235% MTTR, \u221240% reconciliation lag."
+      ]
+    },
+    {
+      "company": "CampusEAI Consortium",
+      "position": "Sr. Consultant Engineer",
+      "startDate": "Mar 2011",
+      "endDate": "Nov 2011",
+      "summary": "",
+      "highlights": [
+        "Led IAM rollouts for 4+ universities; owned delivery from install to handover.",
+        "Added audit/health logs and baseline dashboards \u2192 \u221230% MTTR, \u221235% reconciliation lag; improved go-live SLA adherence to >98%."
+      ]
+    },
+    {
+      "company": "Persistent Systems",
+      "position": "Software Strategist / Analyst",
+      "startDate": "Jul 2006",
+      "endDate": "Nov 2010",
+      "summary": "",
+      "highlights": [
+        "Drove RFIs/RFPs with Presales; crafted GTM for Identity & Access Management.",
+        "Built provisioning/reconciliation connectors for Avaya PBX, Oracle DB, Siebel, and Sun ONE/Active Directory.",
+        "Generated $2M+ in connector revenue; earned Spot Award for contributions."
+      ]
     }
   ],
-  "skills": [],
-  "languages": [],
-  "interests": [],
-  "references": [],
+  "education": [
+    {
+      "institution": "Army Institute of Technology, Pune University, India",
+      "area": "B.S. in Computer Science & Engineering",
+      "studyType": "B.S.",
+      "endDate": "2006"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Core Competencies",
+      "keywords": [
+        "AIOps & Intelligent Automation",
+        "Full\u2011Stack Observability (AppDynamics, Splunk)",
+        "Identity & Access Management (IAM)",
+        "SaaS Reliability Engineering & Digital Resilience",
+        "Kubernetes & Cloud\u2011Native Architectures",
+        "Customer Engineering Leadership",
+        "Machine Learning for Predictive Monitoring",
+        "Judging, Peer Review & Advisory",
+        "Publications & Conference Leadership"
+      ]
+    }
+  ],
   "publications": [
     {
-      "name": "Paper Title Number 1",
-      "publisher": "Journal 1",
-      "releaseDate": "2009-10-01",
-      "website": "https://academicpages.github.io/files/paper1.pdf",
-      "summary": "This paper is about the number 1. The number 2 is left for future work."
+      "name": "From Ops to Experience: AIOps-Enabled MLOps with Identity-Aware and Customer-Informed Pipelines",
+      "publisher": "Proceedings of IEEE WCONF 2025",
+      "releaseDate": "2025-01-01",
+      "summary": "Single-author paper; shows >50% MTTR improvement in the evaluation framework and a tenant-secure SaaS design."
     },
     {
-      "name": "Paper Title Number 2",
-      "publisher": "Journal 1",
-      "releaseDate": "2010-10-01",
-      "website": "https://academicpages.github.io/files/paper2.pdf",
-      "summary": "This paper is about the number 2. The number 3 is left for future work."
-    },
-    {
-      "name": "Paper Title Number 3",
-      "publisher": "Journal 1",
-      "releaseDate": "2015-10-01",
-      "website": "https://academicpages.github.io/files/paper3.pdf",
-      "summary": "This paper is about the number 3. The number 4 is left for future work."
-    },
-    {
-      "name": "Paper Title Number 4",
-      "publisher": "GitHub Journal of Bugs",
-      "releaseDate": "2024-02-17",
-      "website": "https://academicpages.github.io/files/paper3.pdf",
-      "summary": "This paper is about fixing template issue #693."
+      "name": "Blockchain-Based Intrusion Detection and Response Framework for Secure Industrial IoT Networks",
+      "publisher": "Proceedings of IEEE ICCSD 2025",
+      "releaseDate": "2025-01-02",
+      "summary": ""
     }
   ],
   "presentations": [
     {
-      "name": "Talk 1 on Relevant Topic in Your Field",
-      "event": "UC San Francisco, Department of Testing",
-      "date": "2012-03-01",
-      "location": "San Francisco, CA, USA",
-      "description": ""
+      "name": "Observability Trends",
+      "event": "PagerDuty Podcast",
+      "date": "2025-01-01"
     },
     {
-      "name": "Tutorial 1 on Relevant Topic in Your Field",
-      "event": "UC-Berkeley Institute for Testing Science",
-      "date": "2013-03-01",
-      "location": "Berkeley, CA, USA",
-      "description": ""
+      "name": "Keynote Speaker",
+      "event": "Supply Chain Technology Conference",
+      "date": "2025-01-02"
     },
     {
-      "name": "Talk 2 on Relevant Topic in Your Field",
-      "event": "London School of Testing",
-      "date": "2014-02-01",
-      "location": "London, UK",
-      "description": ""
+      "name": "DASA Ambassador Talks",
+      "event": "DASA",
+      "date": "2025-01-03"
     },
     {
-      "name": "Conference Proceeding talk 3 on Relevant Topic in Your Field",
-      "event": "Testing Institute of America 2014 Annual Conference",
-      "date": "2014-03-01",
-      "location": "Los Angeles, CA, USA",
-      "description": ""
-    }
-  ],
-  "teaching": [
-    {
-      "course": "Teaching experience 1",
-      "institution": "University 1, Department",
-      "date": "2014-01-01",
-      "role": "Undergraduate course",
-      "description": ""
-    },
-    {
-      "course": "Teaching experience 2",
-      "institution": "University 1, Department",
-      "date": "2015-01-01",
-      "role": "Workshop",
-      "description": ""
-    }
-  ],
-  "portfolio": [
-    {
-      "name": "Portfolio item number 1",
-      "category": "portfolio",
-      "date": "",
-      "url": "",
-      "description": "Short description of portfolio item number 1<br/><img src='/images/500x300.png'>"
+      "name": "Advisory Board Member",
+      "event": "Tensech Inc.",
+      "date": "2025-07-01"
     }
   ]
 }
