@@ -282,26 +282,39 @@ def update_config(root_dir):
         yaml.dump(config, f, sort_keys=False)
     print("Successfully updated _config.yml")
 
-# (The rest of the functions are unchanged)
+
+
+
+
+
 def update_homepage(root_dir):
+    """Updates the homepage (_pages/about.md)."""
     print("--- Updating Homepage ---")
     homepage_path = root_dir / '_pages' / 'about.md'
+    
+    # The fix is here: We change the title to something simple like "About"
+    # and remove the main h1 from the body, as the layout handles the title.
     content = f"""---
 permalink: /
-title: "{SATBIR_DATA['name']} | Technology Leader"
+title: "About"
 author_profile: true
 ---
 
-## About Me
 {SATBIR_DATA['summary']}
 
 ## Core Competencies
 """
     for competency in SATBIR_DATA['competencies']:
         content += f"- {competency}\n"
+
     with open(homepage_path, 'w') as f:
         f.write(content)
     print("Successfully updated homepage.")
+
+
+
+
+
 
 def create_experience_page(root_dir):
     print("--- Creating Experience Page ---")
