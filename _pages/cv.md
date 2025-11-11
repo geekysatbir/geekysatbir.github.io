@@ -58,9 +58,15 @@ author_profile: true
 
 
 ## Core Competencies
-{% for skill in page.skills %}
-* { skill }
-{% endfor %}
+* AIOps & Intelligent Automation
+* Full‑Stack Observability (AppDynamics, Splunk)
+* Identity & Access Management (IAM)
+* SaaS Reliability Engineering & Digital Resilience
+* Kubernetes & Cloud‑Native Architectures
+* Customer Engineering Leadership
+* Machine Learning for Predictive Monitoring
+* Judging, Peer Review & Advisory
+* Publications & Conference Leadership
 
 ## Publications
 <ul>{% for post in site.publications reversed %}

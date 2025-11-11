@@ -129,6 +129,12 @@
   ],
   "publications": [
     {
+      "name": "Unifying DevOps and MLOps Pipelines Via AI-driven Observability: A Mixed-Methods Study",
+      "publisher": "Asian Journal of Research in Computer Science, 18(6), 334-342",
+      "releaseDate": "2025-06-01",
+      "summary": "A study on integrating AI-driven observability to unify DevOps and MLOps pipelines."
+    },
+    {
       "name": "From Ops to Experience: AIOps-Enabled MLOps with Identity-Aware and Customer-Informed Pipelines",
       "publisher": "Proceedings of IEEE WCONF 2025",
       "releaseDate": "2025-01-01",
@@ -143,9 +149,9 @@
   ],
   "presentations": [
     {
-      "name": "Observability Trends",
-      "event": "PagerDuty Podcast",
-      "date": "2025-01-01"
+      "name": "Monitoring to Observability",
+      "event": "Page it to the Limit",
+      "date": "2025-09-02"
     },
     {
       "name": "Keynote Speaker",

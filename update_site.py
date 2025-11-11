@@ -4,6 +4,7 @@ import yaml
 import re
 import json
 from pathlib import Path
+from datetime import datetime
 
 # --- SATBIR SINGH'S DATA ---
 # This dictionary holds all the content for the website.
@@ -12,10 +13,10 @@ SATBIR_DATA = {
     "email": "satbir.taya84@gmail.com",
     "phone": "+1 510-402-1230",
     "location": "Castro Valley, CA",
-    "avatar": "profile.jpeg",  # CORRECTED to .jpeg
+    "avatar": "profile.jpeg",
     "profiles": {
         "linkedin_user": "satbirprofile",
-        "github_user": "geekysatbir",  # CORRECTED username
+        "github_user": "geekysatbir",
         "facebook_user": "satbir.singh.58726",
         "instagram_user": "satbir7262",
     },
@@ -128,6 +129,23 @@ SATBIR_DATA = {
     ],
     "publications": [
         {
+            "title": "A Review of Hybrid Neural Network and Fuzzy Logic Control Techniques for Optimising Electric Vehicle Performance",
+            "authors": "Singh, S., Pahuja, V., Handaragal, R., Susurani, V., & Malhotra, H.",
+            "date": "2026-01-01",
+            "venue": "ICICC 2026 — Special Session",
+            "category": "under_review",
+            "excerpt": "Paper shows full author list and scope in the submitted manuscript."
+        },
+        {
+            "title": "Unifying DevOps and MLOps Pipelines Via AI-driven Observability: A Mixed-Methods Study",
+            "authors": "Singh, S.",
+            "date": "2025-06-01",
+            "venue": "Asian Journal of Research in Computer Science, 18(6), 334-342",
+            "category": "published",
+            "excerpt": "A study on integrating AI-driven observability to unify DevOps and MLOps pipelines.",
+            "url": "https://hal.science/hal-05107405/"
+        },
+        {
             "title": "From Ops to Experience: AIOps-Enabled MLOps with Identity-Aware and Customer-Informed Pipelines",
             "authors": "Singh, S.",
             "date": "2025-01-01",
@@ -142,23 +160,16 @@ SATBIR_DATA = {
             "venue": "Proceedings of IEEE ICCSD 2025",
             "category": "published",
             "excerpt": ""
-        },
-        {
-            "title": "A Review of Hybrid Neural Network and Fuzzy Logic Control Techniques for Optimising Electric Vehicle Performance",
-            "authors": "Singh, S., Pahuja, V., Handaragal, R., Susurani, V., & Malhotra, H.",
-            "date": "2026-01-01",
-            "venue": "ICICC 2026 — Special Session",
-            "category": "under_review",
-            "excerpt": "Paper shows full author list and scope in the submitted manuscript."
         }
     ],
     "talks": [
         {
-            "title": "Observability Trends",
+            "title": "Monitoring to Observability",
             "type": "Podcast",
-            "venue": "PagerDuty Podcast",
-            "date": "2025-01-01",
-            "url": "https://www.pageittothelimit.com/"
+            "venue": "Page it to the Limit",
+            "date": "2025-09-02",
+            "url": "https://www.pageittothelimit.com/monitoring-o11y-satbir-singh/",
+            "description": "The transition from traditional monitoring technologies to modern observability tools can leave teams confused. Satbir Singh joins us to talk about the new goals of observability tooling and how it will help teams conquer challenges in complex systems."
         },
         {
             "title": "Keynote Speaker",
@@ -242,7 +253,6 @@ def update_config(root_dir):
 
     github_user = SATBIR_DATA['profiles']['github_user']
     
-    # Let GitHub Pages automatically set the URL and baseurl.
     config['url'] = ""
     config['baseurl'] = ""
     
@@ -279,6 +289,7 @@ def update_config(root_dir):
 def update_homepage(root_dir):
     print("--- Updating Homepage ---")
     homepage_path = root_dir / '_pages' / 'about.md'
+    
     content = f"""---
 permalink: /
 title: "About"
@@ -291,9 +302,23 @@ author_profile: true
 """
     for competency in SATBIR_DATA['competencies']:
         content += f"- {competency}\n"
+
+    # --- NEW: Add Recent News Section ---
+    content += "\n## Recent News\n"
+    all_items = []
+    for pub in SATBIR_DATA['publications']:
+        all_items.append({'date': pub['date'], 'type': 'Publication', 'title': pub['title'], 'venue': pub['venue']})
+    for talk in SATBIR_DATA['talks']:
+        all_items.append({'date': talk['date'], 'type': talk['type'], 'title': talk['title'], 'venue': talk['venue']})
+    
+    sorted_items = sorted(all_items, key=lambda x: x['date'], reverse=True)
+    
+    for item in sorted_items[:3]: # Get the 3 most recent items
+        content += f"* **{item['type']}:** \"{item['title']}\" at *{item['venue']}*.\n"
+
     with open(homepage_path, 'w') as f:
         f.write(content)
-    print("Successfully updated homepage.")
+    print("Successfully updated homepage with News section.")
 
 def create_experience_page(root_dir):
     print("--- Creating Experience Page ---")
@@ -324,6 +349,7 @@ def create_publication_files(root_dir):
         filename = f"{pub['date']}-{slugify(pub['title'][:40])}.md"
         filepath = pub_dir / filename
         citation = f"{pub['authors']} ({pub['date'][:4]}) \"{pub['title']}.\" <i>{pub['venue']}</i>."
+        
         content = f"""---
 title: "{pub['title']}"
 collection: publications
@@ -332,7 +358,11 @@ permalink: /publication/{pub['date']}-{slugify(pub['title'][:40])}
 date: {pub['date']}
 venue: "{pub['venue']}"
 excerpt: "{pub['excerpt']}"
-citation: "{citation}"
+"""
+        if pub.get('url'):
+            content += f"paperurl: '{pub['url']}'\n"
+        
+        content += f"""citation: "{citation}"
 ---
 """
         with open(filepath, 'w') as f:
@@ -358,6 +388,9 @@ location: ""
 """
         if talk.get('url'):
             content += f"\n[More information here]({talk['url']})\n"
+        if talk.get('description'):
+            content += f"\n{talk['description']}\n"
+            
         with open(filepath, 'w') as f:
             f.write(content)
     print(f"Created {len(SATBIR_DATA['talks'])} talk files.")
@@ -465,13 +498,8 @@ def update_cv_json(root_dir):
         json.dump(cv_data, f, indent=2)
     print("Successfully updated cv.json")
 
-# --- NEW FUNCTIONS TO FIX TEMPLATE FILES ---
-
 def overwrite_template_files(root_dir):
-    """Overwrites specific template files with corrected versions."""
     print("--- Overwriting template files for fixes ---")
-
-    # Fix for empty Publications page
     publications_page_path = root_dir / '_pages' / 'publications.html'
     publications_content = """---
 layout: archive
@@ -482,34 +510,41 @@ author_profile: true
 
 {% include base_path %}
 
-{% for post in site.publications reversed %}
-  {% include archive-single.html %}
-{% endfor %}
+{% if site.publication_category %}
+  {% for category in site.publication_category  %}
+    {% assign title_shown = false %}
+    {% for post in site.publications reversed %}
+      {% if post.category != category[0] %}
+        {% continue %}
+      {% endif %}
+      {% unless title_shown %}
+        <h2>{{ category[1].title }}</h2><hr />
+        {% assign title_shown = true %}
+      {% endunless %}
+      {% include archive-single.html %}
+    {% endfor %}
+  {% endfor %}
+{% else %}
+  {% for post in site.publications reversed %}
+    {% include archive-single.html %}
+  {% endfor %}
+{% endif %}
 """
     with open(publications_page_path, 'w') as f:
         f.write(publications_content)
     print("Fixed publications page.")
 
-    # Fix for Talks page formatting
     talks_include_path = root_dir / '_includes' / 'archive-single-talk.html'
     talks_include_content = """{% include base_path %}
-
-{% if post.id %}
-  {% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
-{% else %}
-  {% assign title = post.title %}
-{% endif %}
-
+{% if post.id %}{% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}{% else %}{% assign title = post.title %}{% endif %}
 <div class="{{ include.type | default: "list" }}__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     <h2 class="archive__item-title" itemprop="headline">
       <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
     </h2>
     {% if post.date %}<p class="page__meta"><i class="fa fa-clock" aria-hidden="true"></i> {{ post.date | date: '%B %d, %Y' }}</p>{% endif %}
-    <p class="archive__item-excerpt" itemprop="description">
-      {{ post.type }} at {{ post.venue }}{% if post.location and post.location != "" %}, {{ post.location }}{% endif %}
-    </p>
-    {% if post.excerpt %}<p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify }}</p>{% endif %}
+    <p class="archive__item-excerpt" itemprop="description">{{ post.type }} at {{ post.venue }}{% if post.location and post.location != "" %}, {{ post.location }}{% endif %}</p>
+    {% if post.content and post.content != "" %}<p class="archive__item-excerpt" itemprop="description">{{ post.content | markdownify | strip_html | truncatewords: 30 }}</p>{% endif %}
   </article>
 </div>
 """
@@ -518,11 +553,9 @@ author_profile: true
     print("Fixed talks page formatting.")
 
 def create_cv_page(root_dir):
-    """Creates the markdown CV page with Satbir's data."""
     print("--- Creating CV Page ---")
     cv_page_path = root_dir / '_pages' / 'cv.md'
     
-    # Build Work Experience section
     work_experience_md = ""
     for job in SATBIR_DATA['experience']:
         work_experience_md += f"* **{job['title']}**, {job['company']}\n"
@@ -530,6 +563,8 @@ def create_cv_page(root_dir):
         for detail in job['details']:
             work_experience_md += f"  * {detail}\n"
         work_experience_md += "\n"
+
+    competencies_md = "\n".join([f"* {c}" for c in SATBIR_DATA['competencies']])
 
     content = f"""---
 layout: archive
@@ -547,9 +582,7 @@ author_profile: true
 {work_experience_md}
 
 ## Core Competencies
-{{% for skill in page.skills %}}
-* {{ skill }}
-{{% endfor %}}
+{competencies_md}
 
 ## Publications
 <ul>{{% for post in site.publications reversed %}}
@@ -561,13 +594,11 @@ author_profile: true
   {{% include archive-single-talk-cv.html %}}
 {{% endfor %}}</ul>
 """
-    # Replace Jekyll placeholders to avoid processing them in Python
     content = content.replace("{{%", "{%").replace("%}}", "}}")
     
     with open(cv_page_path, 'w') as f:
         f.write(content)
     print("Successfully created cv.md")
-
 
 def main():
     repo_root = Path(__file__).parent.resolve()
@@ -576,23 +607,20 @@ def main():
     clean_repository(repo_root)
     update_config(repo_root)
     
-    # Page content
     update_homepage(repo_root)
     create_experience_page(repo_root)
     create_awards_page(repo_root)
-    create_cv_page(repo_root) # New function call
+    create_cv_page(repo_root)
     
-    # Collection files
     create_publication_files(repo_root)
     create_talk_files(repo_root)
     
-    # Data and template fixes
     update_navigation(repo_root)
     update_cv_json(repo_root)
-    overwrite_template_files(repo_root) # New function call
+    overwrite_template_files(repo_root)
     
     print("\n✅ All tasks completed successfully!")
-    print("Please add a 'profile.jpeg' to the 'images/' directory if you haven't already.")
+    print("Please make sure 'profile.jpeg' is in the 'images/' directory.")
     print("You can now commit and push your changes to GitHub using './update.sh'.")
 
 if __name__ == '__main__':

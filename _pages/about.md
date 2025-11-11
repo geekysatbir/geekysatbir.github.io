@@ -16,3 +16,8 @@ Distinguished technology leader with 19 years across AIOps, Observability, SaaS 
 - Machine Learning for Predictive Monitoring
 - Judging, Peer Review & Advisory
 - Publications & Conference Leadership
+
+## Recent News
+* **Publication:** "A Review of Hybrid Neural Network and Fuzzy Logic Control Techniques for Optimising Electric Vehicle Performance" at *ICICC 2026 — Special Session*.
+* **Podcast:** "Monitoring to Observability" at *Page it to the Limit*.
+* **Advisory:** "Advisory Board Member" at *Tensech Inc.*.
