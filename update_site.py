@@ -345,27 +345,34 @@ def create_publication_files(root_dir):
     pub_dir = root_dir / '_publications'
     pub_dir.mkdir(exist_ok=True)
     for pub in SATBIR_DATA['publications']:
-        filename = f"{pub['date']}-{slugify(pub['title'][:40])}.md"
+        filename = f"{pub['date']}-{slugify(pub['title'][:50])}.md"
         filepath = pub_dir / filename
-        citation = f"{pub['authors']} ({pub['date'][:4]}) \"{pub['title']}.\" <i>{pub['venue']}</i>."
         
-        # *** THIS IS THE FIX: The 'collection: publications' line is now correctly included. ***
+        citation = f"{pub['authors']}. ({pub['date'][:4]}) \"{pub['title']}.\" <i>{pub['venue']}</i>."
+        
+        # --- THIS IS THE CORRECTED CONTENT BLOCK ---
+        # It now includes "collection: publications" which is essential for Jekyll.
         content = f"""---
 title: "{pub['title']}"
 collection: publications
-category: {pub['category']}
-permalink: /publication/{pub['date']}-{slugify(pub['title'][:40])}
+permalink: /publication/{filename.replace('.md', '')}
+excerpt: "{pub['excerpt']}"
 date: {pub['date']}
 venue: "{pub['venue']}"
-excerpt: "{pub['excerpt']}"
+citation: '{citation}'
 """
+        # Add paperurl only if it exists
         if pub.get('url'):
             content += f"paperurl: '{pub['url']}'\n"
         
-        content += f"""citation: "{citation}"
----
-"""
-        with open(filepath, 'w') as f:
+        # Add the category for sorting on the publications page
+        if pub.get('category'):
+            content += f"category: {pub['category']}\n"
+
+        content += "---\n"
+        # --- END OF CORRECTED BLOCK ---
+
+        with open(filepath, 'w', encoding='utf-8') as f:
             f.write(content)
     print(f"Created {len(SATBIR_DATA['publications'])} publication files.")
 
@@ -391,7 +398,7 @@ location: ""
         if talk.get('description'):
             content += f"\n{talk['description']}\n"
             
-        with open(filepath, 'w') as f:
+        with open(filepath, 'w', encoding='utf-8') as f:
             f.write(content)
     print(f"Created {len(SATBIR_DATA['talks'])} talk files.")
 
@@ -415,7 +422,7 @@ author_profile: true
     content += "\n## Professional Memberships\n"
     for membership in SATBIR_DATA['memberships']:
         content += f"- {membership}\n"
-    with open(page_path, 'w') as f:
+    with open(page_path, 'w', encoding='utf-8') as f:
         f.write(content)
     print("Successfully created awards.md")
 
@@ -530,7 +537,7 @@ author_profile: true
   {% endfor %}
 {% endif %}
 """
-    with open(publications_page_path, 'w') as f:
+    with open(publications_page_path, 'w', encoding='utf-8') as f:
         f.write(publications_content)
     print("Fixed publications page.")
 
@@ -548,7 +555,7 @@ author_profile: true
   </article>
 </div>
 """
-    with open(talks_include_path, 'w') as f:
+    with open(talks_include_path, 'w', encoding='utf-8') as f:
         f.write(talks_include_content)
     print("Fixed talks page formatting.")
 
@@ -596,7 +603,7 @@ author_profile: true
 """
     content = content.replace("{{%", "{%").replace("%}}", "}}")
     
-    with open(cv_page_path, 'w') as f:
+    with open(cv_page_path, 'w', encoding='utf-8') as f:
         f.write(content)
     print("Successfully created cv.md")
 
