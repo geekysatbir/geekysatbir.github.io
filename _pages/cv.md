@@ -67,7 +67,7 @@ author_profile: true
 * AIOps & Intelligent Automation (AI-driven auto-remediation)
 * Full‑Stack Observability (AppDynamics, Splunk)
 * Identity & Access Management (IAM)
-* SaaS Reliability Engineering & Digital Resilience
+* SaaS Reliability Engineering & Digital Resilience 
 * Kubernetes & Cloud‑Native Architectures
 * Customer Engineering Leadership
 * Machine Learning for Predictive Monitoring
