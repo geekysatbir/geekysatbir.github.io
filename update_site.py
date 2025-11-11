@@ -190,7 +190,6 @@ SATBIR_DATA = {
 }
 
 # --- UTILITY FUNCTIONS ---
-
 def slugify(text):
     text = text.lower().strip()
     text = re.sub(r'[^\w\s-]', '', text)
@@ -208,18 +207,16 @@ def clean_directory(dir_path):
             os.remove(os.path.join(dir_path, filename))
 
 # --- CORE FUNCTIONS ---
-
 def clean_repository(root_dir):
     print("--- Cleaning Repository ---")
     dirs_to_clean = ['_posts', '_portfolio', '_teaching', '_publications', '_talks']
     for d in dirs_to_clean:
         clean_directory(root_dir / d)
 
-    # Files and directories to remove completely
     items_to_remove = [
         'talkmap.ipynb', 'talkmap.py', 'talkmap_out.ipynb', 'talkmap',
         'markdown_generator', 'CONTRIBUTING.md', 'README.md',
-        '.github'  # <-- ADDED THIS LINE TO REMOVE THE GITHUB ACTIONS WORKFLOWS
+        '.github'
     ]
     for item in items_to_remove:
         path = root_dir / item
@@ -237,19 +234,19 @@ def clean_repository(root_dir):
         f.write(f"# {SATBIR_DATA['name']}'s Personal Website\n\nThis repository contains the source code for my personal website, built with Jekyll and the Academic Pages theme.\n")
     print("Created new README.md")
 
-# (The rest of the functions: update_config, update_homepage, create_experience_page, etc., are unchanged)
 def update_config(root_dir):
-    """Updates the main _config.yml file."""
     print("--- Updating _config.yml ---")
     config_path = root_dir / '_config.yml'
     with open(config_path, 'r') as f:
         config = yaml.safe_load(f)
 
     # Basic site settings
+    github_user = SATBIR_DATA['profiles']['github_user']
+    config['url'] = f"https://{github_user}.github.io"  # <-- THIS IS THE FIX
     config['title'] = SATBIR_DATA['name']
     config['name'] = SATBIR_DATA['name']
     config['description'] = "Satbir Singh's Professional Portfolio"
-    config['repository'] = f"{SATBIR_DATA['profiles']['github_user']}/{SATBIR_DATA['profiles']['github_user']}.github.io"
+    config['repository'] = f"{github_user}/{github_user}.github.io"
 
     # Author settings
     config['author']['name'] = SATBIR_DATA['name']
@@ -260,7 +257,7 @@ def update_config(root_dir):
     config['author']['email'] = SATBIR_DATA['email']
     
     # Social/Academic links
-    config['author']['github'] = SATBIR_DATA['profiles']['github_user']
+    config['author']['github'] = github_user
     config['author']['linkedin'] = SATBIR_DATA['profiles']['linkedin_user']
     config['author']['facebook'] = SATBIR_DATA['profiles']['facebook_user']
     config['author']['instagram'] = SATBIR_DATA['profiles']['instagram_user']
@@ -280,12 +277,10 @@ def update_config(root_dir):
         yaml.dump(config, f, sort_keys=False)
     print("Successfully updated _config.yml")
 
-
+# (The rest of the functions are unchanged)
 def update_homepage(root_dir):
-    """Updates the homepage (_pages/about.md)."""
     print("--- Updating Homepage ---")
     homepage_path = root_dir / '_pages' / 'about.md'
-    
     content = f"""---
 permalink: /
 title: "{SATBIR_DATA['name']} | Technology Leader"
@@ -299,17 +294,13 @@ author_profile: true
 """
     for competency in SATBIR_DATA['competencies']:
         content += f"- {competency}\n"
-
     with open(homepage_path, 'w') as f:
         f.write(content)
     print("Successfully updated homepage.")
 
-
 def create_experience_page(root_dir):
-    """Creates a new page for Professional Experience."""
     print("--- Creating Experience Page ---")
     page_path = root_dir / '_pages' / 'experience.md'
-    
     content = """---
 layout: archive
 title: "Professional Experience"
@@ -324,24 +315,18 @@ author_profile: true
         for detail in job['details']:
             content += f"- {detail}\n"
         content += "\n"
-
     with open(page_path, 'w') as f:
         f.write(content)
     print("Successfully created experience.md")
 
-
 def create_publication_files(root_dir):
-    """Creates markdown files for each publication."""
     print("--- Creating Publication Files ---")
     pub_dir = root_dir / '_publications'
     pub_dir.mkdir(exist_ok=True)
-
     for pub in SATBIR_DATA['publications']:
         filename = f"{pub['date']}-{slugify(pub['title'][:40])}.md"
         filepath = pub_dir / filename
-        
         citation = f"{pub['authors']} ({pub['date'][:4]}) \"{pub['title']}.\" <i>{pub['venue']}</i>."
-
         content = f"""---
 title: "{pub['title']}"
 collection: publications
@@ -357,17 +342,13 @@ citation: "{citation}"
             f.write(content)
     print(f"Created {len(SATBIR_DATA['publications'])} publication files.")
 
-
 def create_talk_files(root_dir):
-    """Creates markdown files for each talk/engagement."""
     print("--- Creating Talk Files ---")
     talk_dir = root_dir / '_talks'
     talk_dir.mkdir(exist_ok=True)
-
     for talk in SATBIR_DATA['talks']:
         filename = f"{talk['date']}-{slugify(talk['title'])}.md"
         filepath = talk_dir / filename
-
         content = f"""---
 title: "{talk['title']}"
 collection: talks
@@ -380,17 +361,13 @@ location: ""
 """
         if talk.get('url'):
             content += f"\n[More information here]({talk['url']})\n"
-
         with open(filepath, 'w') as f:
             f.write(content)
     print(f"Created {len(SATBIR_DATA['talks'])} talk files.")
 
-
 def create_awards_page(root_dir):
-    """Creates a page for awards and memberships."""
     print("--- Creating Awards & Memberships Page ---")
     page_path = root_dir / '_pages' / 'awards.md'
-    
     content = """---
 layout: archive
 title: "Awards & Professional Activities"
@@ -405,21 +382,16 @@ author_profile: true
             content += f"- [{award['name']}]({award['url']})\n"
         else:
             content += f"- {award['name']}\n"
-            
     content += "\n## Professional Memberships\n"
     for membership in SATBIR_DATA['memberships']:
         content += f"- {membership}\n"
-
     with open(page_path, 'w') as f:
         f.write(content)
     print("Successfully created awards.md")
 
-
 def update_navigation(root_dir):
-    """Updates the main navigation menu."""
     print("--- Updating Navigation ---")
     nav_path = root_dir / '_data' / 'navigation.yml'
-    
     new_nav = {
         'main': [
             {'title': 'About', 'url': '/'},
@@ -430,17 +402,13 @@ def update_navigation(root_dir):
             {'title': 'CV', 'url': '/cv/'},
         ]
     }
-    
     with open(nav_path, 'w') as f:
         yaml.dump(new_nav, f, sort_keys=False)
     print("Successfully updated navigation.yml")
 
-
 def update_cv_json(root_dir):
-    """Updates the _data/cv.json file."""
     print("--- Updating cv.json ---")
     cv_json_path = root_dir / '_data' / 'cv.json'
-    
     profiles = []
     for key, user in SATBIR_DATA['profiles'].items():
         network = key.replace('_user', '').capitalize()
@@ -451,7 +419,6 @@ def update_cv_json(root_dir):
             url = f"https://github.com/{user}/"
         if url:
             profiles.append({"network": network, "username": user, "url": url})
-
     cv_data = {
         "basics": {
             "name": SATBIR_DATA['name'],
@@ -497,7 +464,6 @@ def update_cv_json(root_dir):
             } for talk in SATBIR_DATA['talks']
         ]
     }
-    
     with open(cv_json_path, 'w') as f:
         json.dump(cv_data, f, indent=2)
     print("Successfully updated cv.json")
