@@ -6,14 +6,13 @@ import json
 from pathlib import Path
 
 # --- SATBIR SINGH'S DATA ---
-# This dictionary holds all the content for the website.
-# To update the site in the future, you can just modify this section and re-run the script.
+# (This section remains the same as before)
 SATBIR_DATA = {
     "name": "Satbir Singh",
     "email": "satbir.taya84@gmail.com",
     "phone": "+1 510-402-1230",
     "location": "Castro Valley, CA",
-    "avatar": "profile.png",  # Assuming a profile picture named 'profile.png' will be placed in the 'images/' directory.
+    "avatar": "profile.png",
     "profiles": {
         "linkedin_user": "satbirprofile",
         "github_user": "SatbirMD",
@@ -193,7 +192,6 @@ SATBIR_DATA = {
 # --- UTILITY FUNCTIONS ---
 
 def slugify(text):
-    """Converts a string into a URL-friendly slug."""
     text = text.lower().strip()
     text = re.sub(r'[^\w\s-]', '', text)
     text = re.sub(r'[\s_-]+', '-', text)
@@ -201,7 +199,6 @@ def slugify(text):
     return text
 
 def clean_directory(dir_path):
-    """Removes all .md and .html files from a directory."""
     if not os.path.exists(dir_path):
         print(f"Directory not found, skipping cleanup: {dir_path}")
         return
@@ -213,10 +210,7 @@ def clean_directory(dir_path):
 # --- CORE FUNCTIONS ---
 
 def clean_repository(root_dir):
-    """Removes old placeholder content from the repository."""
     print("--- Cleaning Repository ---")
-    
-    # Directories to clean of markdown files
     dirs_to_clean = ['_posts', '_portfolio', '_teaching', '_publications', '_talks']
     for d in dirs_to_clean:
         clean_directory(root_dir / d)
@@ -224,7 +218,8 @@ def clean_repository(root_dir):
     # Files and directories to remove completely
     items_to_remove = [
         'talkmap.ipynb', 'talkmap.py', 'talkmap_out.ipynb', 'talkmap',
-        'markdown_generator', 'CONTRIBUTING.md', 'README.md'
+        'markdown_generator', 'CONTRIBUTING.md', 'README.md',
+        '.github'  # <-- ADDED THIS LINE TO REMOVE THE GITHUB ACTIONS WORKFLOWS
     ]
     for item in items_to_remove:
         path = root_dir / item
@@ -236,14 +231,13 @@ def clean_repository(root_dir):
                 shutil.rmtree(path)
                 print(f"Removed directory: {item}")
         except FileNotFoundError:
-            pass # Item already gone
+            pass
 
-    # Create a new simple README
     with open(root_dir / 'README.md', 'w') as f:
         f.write(f"# {SATBIR_DATA['name']}'s Personal Website\n\nThis repository contains the source code for my personal website, built with Jekyll and the Academic Pages theme.\n")
     print("Created new README.md")
 
-
+# (The rest of the functions: update_config, update_homepage, create_experience_page, etc., are unchanged)
 def update_config(root_dir):
     """Updates the main _config.yml file."""
     print("--- Updating _config.yml ---")
@@ -272,7 +266,7 @@ def update_config(root_dir):
     config['author']['instagram'] = SATBIR_DATA['profiles']['instagram_user']
     
     # Clear unused links
-    for key in ['googlescholar', 'twitter', 'medium', 'stackoverflow']:
+    for key in ['googlescholar', 'twitter', 'medium', 'stackoverflow', 'orcid', 'pubmed']:
         if key in config['author']:
             config['author'][key] = None
 
@@ -509,38 +503,20 @@ def update_cv_json(root_dir):
     print("Successfully updated cv.json")
 
 def main():
-    """Main function to run all update steps."""
-    
-    # Assume the script is in the root of the repo
     repo_root = Path(__file__).parent.resolve()
-    
     print(f"Updating repository at: {repo_root}")
-    
-    # 1. Clean up old content
     clean_repository(repo_root)
-    
-    # 2. Update main configuration
     update_config(repo_root)
-    
-    # 3. Update content pages
     update_homepage(repo_root)
     create_experience_page(repo_root)
     create_awards_page(repo_root)
-    
-    # 4. Create collection files
     create_publication_files(repo_root)
     create_talk_files(repo_root)
-    
-    # 5. Update data files
     update_navigation(repo_root)
     update_cv_json(repo_root)
-    
-    # Remove the script itself after running
-    # os.remove(__file__)
-    
     print("\n✅ All tasks completed successfully!")
-    print("Please add a 'profile.png' to the 'images/' directory.")
-    print("You can now commit and push your changes to GitHub.")
+    print("Please add a 'profile.png' to the 'images/' directory if you haven't already.")
+    print("You can now commit and push your changes to GitHub using './update.sh'.")
 
 if __name__ == '__main__':
     main()
