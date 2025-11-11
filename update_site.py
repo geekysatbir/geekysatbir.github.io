@@ -349,9 +349,10 @@ def create_publication_files(root_dir):
         filepath = pub_dir / filename
         citation = f"{pub['authors']} ({pub['date'][:4]}) \"{pub['title']}.\" <i>{pub['venue']}</i>."
         
-        # *** THIS IS THE FIX: The 'collection' line is removed ***
+        # *** THIS IS THE FIX: The 'collection: publications' line is ADDED BACK ***
         content = f"""---
 title: "{pub['title']}"
+collection: publications
 category: {pub['category']}
 permalink: /publication/{pub['date']}-{slugify(pub['title'][:40])}
 date: {pub['date']}

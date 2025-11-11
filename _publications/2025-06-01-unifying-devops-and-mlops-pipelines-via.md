@@ -1,5 +1,6 @@
 ---
 title: "Unifying DevOps and MLOps Pipelines Via AI-driven Observability: A Mixed-Methods Study"
+collection: publications
 category: published
 permalink: /publication/2025-06-01-unifying-devops-and-mlops-pipelines-via
 date: 2025-06-01

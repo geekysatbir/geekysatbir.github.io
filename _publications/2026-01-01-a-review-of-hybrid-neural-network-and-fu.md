@@ -1,5 +1,6 @@
 ---
 title: "A Review of Hybrid Neural Network and Fuzzy Logic Control Techniques for Optimising Electric Vehicle Performance"
+collection: publications
 category: under_review
 permalink: /publication/2026-01-01-a-review-of-hybrid-neural-network-and-fu
 date: 2026-01-01

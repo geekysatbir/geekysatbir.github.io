@@ -1,5 +1,6 @@
 ---
 title: "From Ops to Experience: AIOps-Enabled MLOps with Identity-Aware and Customer-Informed Pipelines"
+collection: publications
 category: published
 permalink: /publication/2025-01-01-from-ops-to-experience-aiops-enabled-ml
 date: 2025-01-01
