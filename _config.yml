@@ -4,11 +4,11 @@ title: Satbir Singh
 title_separator: '-'
 name: Satbir Singh
 description: Satbir Singh's Professional Portfolio
-url: https://academicpages.github.io
+url: ''
 baseurl: ''
 repository: SatbirMD/SatbirMD.github.io
 author:
-  avatar: profile.png
+  avatar: profile.jpeg
   name: Satbir Singh
   pronouns: null
   bio: Technology Leader in AIOps, Observability, and SaaS Reliability.

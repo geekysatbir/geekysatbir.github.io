@@ -12,7 +12,7 @@ SATBIR_DATA = {
     "email": "satbir.taya84@gmail.com",
     "phone": "+1 510-402-1230",
     "location": "Castro Valley, CA",
-    "avatar": "profile.png",
+    "avatar": "profile.jpeg",
     "profiles": {
         "linkedin_user": "satbirprofile",
         "github_user": "SatbirMD",
@@ -242,7 +242,12 @@ def update_config(root_dir):
 
     # Basic site settings
     github_user = SATBIR_DATA['profiles']['github_user']
-    config['url'] = f"https://{github_user}.github.io"  # <-- THIS IS THE FIX
+    
+    # *** THIS IS THE FIX ***
+    # Let GitHub Pages automatically set the URL and baseurl.
+    config['url'] = ""
+    config['baseurl'] = ""
+    
     config['title'] = SATBIR_DATA['name']
     config['name'] = SATBIR_DATA['name']
     config['description'] = "Satbir Singh's Professional Portfolio"
