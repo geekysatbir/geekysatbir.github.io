@@ -11,7 +11,7 @@ author_profile: true
 * **B.S. in Computer Science & Engineering**, Army Institute of Technology, Pune University, India, 2006
 
 ## Work Experience
-### Software Consulting Engineer
+### Technical Leader
 **Cisco Systems, Inc. (AppDynamics/Splunk)** | *Apr 2019 – Present, San Francisco Bay Area, CA*
 
 - Led end-to-end SaaS observability strategies ensuring uninterrupted performance across multi-billion-dollar deployments.
