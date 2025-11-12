@@ -35,7 +35,7 @@ SATBIR_DATA = {
     "experience": [
         {
             "company": "Cisco Systems, Inc. (AppDynamics/Splunk)",
-            "title": "Software Consulting Engineer",
+            "title": "Technical Leader",
             "dates": "Apr 2019 – Present",
             "location": "San Francisco Bay Area, CA",
             "details": [

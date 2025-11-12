@@ -5,7 +5,7 @@ permalink: /experience/
 author_profile: true
 ---
 
-## Software Consulting Engineer
+## Technical Leader
 **Cisco Systems, Inc. (AppDynamics/Splunk)** | _Apr 2019 – Present_ | San Francisco Bay Area, CA
 
 - Led end-to-end SaaS observability strategies ensuring uninterrupted performance across multi-billion-dollar deployments.

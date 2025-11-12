@@ -694,7 +694,7 @@ SATBIR_DATA = {
     "experience": [
         {
             "company": "Cisco Systems, Inc. (AppDynamics/Splunk)",
-            "title": "Software Consulting Engineer",
+            "title": "Technical Leader",
             "dates": "Apr 2019 – Present",
             "location": "San Francisco Bay Area, CA",
             "details": [
@@ -1339,7 +1339,7 @@ FILE: _data/cv.json
   "work": [
     {
       "company": "Cisco Systems, Inc. (AppDynamics/Splunk)",
-      "position": "Software Consulting Engineer",
+      "position": "Technical Leader",
       "startDate": "Apr 2019",
       "endDate": "Present",
       "summary": "",
@@ -4619,7 +4619,7 @@ author_profile: true
 * **B.S. in Computer Science & Engineering**, Army Institute of Technology, Pune University, India, 2006
 
 ## Work Experience
-### Software Consulting Engineer
+### Technical Leader
 **Cisco Systems, Inc. (AppDynamics/Splunk)** | *Apr 2019 – Present, San Francisco Bay Area, CA*
 
 - Led end-to-end SaaS observability strategies ensuring uninterrupted performance across multi-billion-dollar deployments.
@@ -4704,7 +4704,7 @@ permalink: /experience/
 author_profile: true
 ---
 
-## Software Consulting Engineer
+## Technical Leader
 **Cisco Systems, Inc. (AppDynamics/Splunk)** | _Apr 2019 – Present_ | San Francisco Bay Area, CA
 
 - Led end-to-end SaaS observability strategies ensuring uninterrupted performance across multi-billion-dollar deployments.
